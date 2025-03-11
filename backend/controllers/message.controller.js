@@ -5,7 +5,7 @@ import { User } from "../models/user.model.js"
 export const getUsersForSidebar = async (req, res) => {
     try {
         const loggedInUserId = req.user._id
-        const filteredUsers = await User.find({ id: { $ne: loggedInUserId.select("-password") } })
+        const filteredUsers = await User.find({ id: { $ne: loggedInUserId } }).select("-password")
 
         res.status(200).json(filteredUsers)
     } catch (error) {
@@ -38,7 +38,7 @@ export const sendMessage = async (req, res) => {
     try {
         const { text, image } = req.body
         const { id: recieverId } = req.params
-        const { id: senderId } = req.user._id
+        const senderId = req.user._id
 
         if (!text && !image)
             return res.status(400).json({ message: "Message must include text or image" })
