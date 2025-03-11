@@ -1,5 +1,5 @@
 import express from "express"
-import { verifyUser } from "../lib/verify";
+import { verifyUser } from "../lib/verify.js";
 import { getMessages, getUsersForSidebar, sendMessage } from "../controllers/message.controller.js";
 
 const router = express.Router()
