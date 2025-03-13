@@ -1,0 +1,72 @@
+@mixin flex-between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-items-end{
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+}
+
+@mixin flex-center-start{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+@mixin flex-between-col{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+@mixin flex-center-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@mixin flex-between-col-start{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+@mixin flex-between-col-end{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+@mixin flex-center-col-end{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+@mixin flex-center-col-start{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+:root{
+    --bg-dark-purple: #1e151e;
+    --primary-peach: #cf8a4a;
+    --gray: #5b504e;
+    --gray-2: #2e1e22 ;
+}
