@@ -1,0 +1,139 @@
+@import "../../responsive.scss";
+@import "../../utilities.scss";
+
+.signup-section {
+    @include flex-between;
+    height: 100%;
+    padding: 50px 0;
+    background-color: var(--bg-dark-purple);
+
+    .content-left {
+        @include flex-center-col;
+        flex: 1;
+
+        .section-info {
+            @include flex-center-col;
+
+            .message-icon {
+                border: 1px solid;
+                border-radius: 15px;
+                padding: 10px;
+                width: 50px;
+                height: 50px;
+                color: var(--primary-peach);
+            }
+
+            h1 {
+                font-weight: 700;
+                font-size: 30px;
+                color: var(--primary-peach);
+            }
+
+            p {
+                color: var(--gray)
+            }
+        }
+
+        form {
+            @include flex-center-col;
+            width: 100%;
+
+            .input-cont {
+                @include flex-center-col-start;
+                width: 70%;
+                margin: 15px 0;
+
+                @include s {
+                    width: 90%;
+                }
+
+                label {
+                    color: var(--gray)
+                }
+
+                span {
+                    @include flex-between;
+                    width: 100%;
+                    position: relative;
+                    border: 1px solid var(--gray);
+                    border-radius: 10px;
+                    padding: 10px;
+
+                    .mail-icon,
+                    .user-icon,
+                    .lock-icon {
+                        color: var(--gray);
+                    }
+
+                    input {
+                        width: 100%;
+                        margin: 0 10px;
+                        color: var(--gray);
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    .eye-cont {
+                        position: absolute;
+                        width: 40px;
+                        right: 0;
+                        padding: 0;
+                        border: none;
+
+                        .eye {
+                            width: 30px;
+                            height: 30px;
+                            color: var(--gray);
+                        }
+                    }
+                }
+            }
+
+            .create-acc-btn {
+                margin: 30px 0;
+                width: 70%;
+                border-radius: 15px;
+                padding: 10px;
+                transition: all 0.2s ease-in-out;
+                background-color: var(--primary-peach);
+                font-weight: 600;
+                cursor: pointer;
+
+                @include s {
+                    width: 90%;
+                }
+            }
+
+            .login-redirect-cont {
+                @include flex-center;
+                color: var(--gray);
+
+                a {
+                    color: var(--primary-peach);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    @keyframes gridHover {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    .content-right {
+        flex: 1;
+        @include flex-center-col;
+
+        @include l {
+            display: none;
+        }
+    }
+}
