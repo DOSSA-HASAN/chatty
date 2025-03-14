@@ -1,0 +1,166 @@
+@import "../../responsive.scss";
+@import "../../utilities.scss";
+
+.navbar {
+    @include flex-between;
+    padding: 10px;
+    background-color: var(--bg-dark-purple);
+
+    @include m {
+        display: none;
+    }
+
+    .logo-cont {
+        @include flex-center;
+        background-color: var(--bg-dark-purple);
+
+        @include flex-center;
+
+        .message-icon {
+            border: 1px solid var(--primary-peach);
+            color: var(--primary-peach);
+            border-radius: 15px;
+            width: 50px;
+            height: 50px;
+            padding: 10px;
+        }
+
+        p {
+            color: var(--primary-peach);
+            font-weight: 700;
+            font-size: 22px;
+            margin-left: 10px;
+        }
+
+
+        @include m {
+            width: 100%;
+            @include flex-between;
+        }
+
+        .menu-icon {
+            color: var(--primary-peach);
+
+            @include m-min {
+                display: none
+            }
+        }
+    }
+
+    .account-options {
+        @include flex-between;
+        width: 300px;
+
+        a,
+        div {
+            @include flex-center;
+            cursor: pointer;
+
+            .icon {
+                color: var(--primary-peach);
+
+            }
+
+            p {
+                color: var(--primary-peach);
+            }
+        }
+    }
+}
+
+@keyframes hideMobileOptions {
+    from {
+        transform: translateY(0px);
+        background-color: hsla(261, 39%, 47%, 0.3);
+        border-radius: 0 0 10px 10px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        height: 200px;
+    }
+
+    to {
+        transform: translateY(-300px);
+    }
+}
+
+
+@keyframes showMobileOptions {
+    from {
+        transform: translateY(-300px);
+    }
+
+    to {
+        transform: translateY(0px);
+        background-color: hsla(261, 39%, 47%, 0.3);
+        border-radius: 0 0 10px 10px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        height: 200px;
+    }
+}
+
+.navbar-mobile {
+    @include m-min {
+        display: none
+    }
+
+    background-color: var(--bg-dark-purple);
+    width: 100%;
+    // padding: 10px;
+    height: 100px;
+
+    .header {
+        @include flex-between;
+        width: 100%;
+        position: relative;
+        z-index: 100;
+
+        .logo-cont {
+            @include flex-center;
+
+            .message-icon {
+                color: var(--primary-peach);
+                border: 1px solid var(--primary-peach);
+                border-radius: 10px;
+                padding: 10px;
+                width: 50px;
+                height: 50px;
+            }
+
+            p {
+                color: var(--primary-peach);
+                font-weight: 700;
+                font-size: 22px;
+                margin-left: 10px;
+            }
+        }
+
+        .menu-icon {
+            color: var(--primary-peach);
+        }
+    }
+
+    .account-options {
+        animation: hideMobileOptions 0.3s ease-in-out forwards;
+        @include flex-center-col;
+        position: absolute;
+        top: 0;
+        width: 100%;
+
+        a,
+        div {
+            @include flex-center;
+            color: var(--primary-peach);
+            margin: 10px 0;
+
+            p {
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .showMobileOptions {
+        animation: showMobileOptions 0.3s ease-in-out forwards;
+        
+    }
+}
