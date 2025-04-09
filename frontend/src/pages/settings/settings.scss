@@ -1,0 +1,143 @@
+@import "../../responsive.scss";
+@import "../../utilities.scss";
+
+.settings-section {
+
+    @include flex-center-col;
+
+    main {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 0 20px;
+
+        @include l {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+        }
+
+        @include m {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+        }
+
+        .theme-btn {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid;
+            @include flex-center;
+            margin: 20px 0;
+
+            div {
+                width: calc(100px / 4);
+                height: 30px;
+                border-radius: 5px;
+                margin: 0 5px;
+            }
+        }
+    }
+
+    .preview-cont {
+        width: 90%;
+        padding: 50px;
+        border-radius: 15px;
+        @include flex-center;
+
+        main {
+            width: 60%;
+
+            @include l {
+                width: 100%;
+            }
+
+            border-radius: 15px;
+            display: flex;
+            align-items: start;
+            justify-content: first baseline;
+            flex-direction: column;
+            padding-bottom: 20px;
+
+            .user-info {
+                display: flex;
+                align-items: start;
+                justify-content: start;
+                border-bottom: 1px solid gray;
+                width: 99%;
+                padding: 10px;
+
+                .user-initial {
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    @include flex-center;
+                    margin-right: 10px
+                }
+
+                .user-status {
+                    @include flex-center-col-start;
+                }
+            }
+
+            .messages-cont {
+                width: 100%;
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+
+                .sent {
+                    @include flex-start-col;
+                    padding: 10px;
+                    max-width: 50%;
+
+                    @include m {
+                        max-width: 90%;
+                    }
+
+                    align-self: flex-start;
+                }
+
+                .not-sent {
+                    padding: 10px;
+                    max-width: 50%;
+
+                    @include m {
+                        max-width: 90%;
+                    }
+
+                    @include flex-end-col;
+                    align-self: flex-end;
+                }
+
+                .message-content {
+                    padding: 5px;
+                    border-radius: 5px;
+                }
+
+                .message-timestamp {
+                    font-size: 10px;
+                }
+            }
+
+            .preview-form {
+                @include flex-center;
+                width: 100%;
+                @include m{
+                    padding: 15px 10px;
+                }
+                input {
+                    width: 83%;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                .send-icon {
+                    @include flex-center-col-end;
+                }
+            }
+        }
+    }
+
+}
