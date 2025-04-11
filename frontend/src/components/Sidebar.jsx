@@ -1,5 +1,5 @@
 import { Users2 } from 'lucide-react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useChatStore } from '../store/useChatStore'
 import { useAuthStore } from '../store/useAuthStore'
 import SidebarSkeleton from './skeleton/SidebarSkeleton'
@@ -8,11 +8,9 @@ function Sidebar() {
 
   const { messages, users, selectedUser, isUsersLoading, isMessagesLoading, getUsers, getMessages, setSelectedUser } = useChatStore();
   const { authUser } = useAuthStore()
-  const onlineUsers = []
 
   useEffect(() => {
     getUsers(authUser._id);
-    console.log(selectedUser)
   }, [getUsers])
 
   return (
@@ -22,17 +20,17 @@ function Sidebar() {
         <p>Contacts</p>
       </figure>
       {
-        users.length === 0 ? <SidebarSkeleton /> : 
+        users.length === 0 ? <SidebarSkeleton /> :
 
-        users.map((user) => (
-          <div className="p-3 mt-3 mb-t-3 flex justify-start items-center bg-base-300 rounded-lg" onClick={() => setSelectedUser(user.id)}>
-            <img className=" mr-10 rounded-full bg-base-300 w-20 h-20" src={user.profilePic || "/no-avatar.png"} alt="" />
-            <span>
-              <p>{user?.fullName || user.username}</p>
-              <p className='text-base-secondary'>Online</p>
-            </span>
-          </div>
-        ))
+          users.map((user) => (
+            <div key={user._id} className={`p-3 mt-3 mb-t-3 flex justify-start items-center bg-base-300 rounded-lg hover:cursor-pointer ${selectedUser === user?._id ? 'border-2 border-base-primary bg-secondary' : ''}`} onClick={() => setSelectedUser(user)}>
+              <img className=" mr-10 rounded-full bg-base-300 w-20 h-20" src={user.profilePic || "/no-avatar.png"} alt="" />
+              <span>
+                <p>{user?.fullName || user.username}</p>
+                <p className='text-green-400'>Online</p>
+              </span>
+            </div>
+          ))
       }
     </section>
   )
