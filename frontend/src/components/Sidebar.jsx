@@ -14,7 +14,7 @@ function Sidebar() {
   }, [getUsers])
 
   return (
-    <section className='sidebar-section bg-base-100 flex flex-col justify-start item-start h-full flex-1 overflow-scroll p-[13px] border-r-2 border-base-primary'>
+    <section className={`sidebar-section bg-base-100 flex flex-col justify-start item-start h-full overflow-scroll pr-3 pl-3 md:flex-2 lg:flex-1 flex-1  ${selectedUser !== null ? 'hidden md:flex' : ''}`}>
       <figure className='flex justify-start items-center'>
         <Users2 />
         <p>Contacts</p>
@@ -23,8 +23,8 @@ function Sidebar() {
         users.length === 0 ? <SidebarSkeleton /> :
 
           users.map((user) => (
-            <div key={user._id} className={`p-3 mt-3 mb-t-3 flex justify-start items-center bg-base-300 rounded-lg hover:cursor-pointer ${selectedUser === user?._id ? 'border-2 border-base-primary bg-secondary' : ''}`} onClick={() => setSelectedUser(user)}>
-              <img className=" mr-10 rounded-full bg-base-300 w-20 h-20" src={user.profilePic || "/no-avatar.png"} alt="" />
+            <div key={user._id} className={`p-3 mt-3 mb-t-3 flex justify-start items-center bg-base-300 rounded-lg hover:cursor-pointer w-full ${selectedUser === user?._id ? 'border-2 border-base-primary bg-secondary' : ''}`} onClick={() => setSelectedUser(user)}>
+              <img className=" mr-10 rounded-full bg-base-300 w-15 h-15 border-2" src={user.profilePic || "/no-avatar.png"} alt="" />
               <span>
                 <p>{user?.fullName || user.username}</p>
                 <p className='text-green-400'>Online</p>
