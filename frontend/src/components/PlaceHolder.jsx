@@ -3,7 +3,7 @@ import React from 'react'
 
 function PlaceHolder() {
   return (
-    <section className='h-screen bg-transparent home-page-content-right flex justify-center flex-col items-center flex-3'>
+    <section className='h-screen bg-transparent home-page-content-right flex justify-center flex-col items-center flex-3 hidden sm:flex'>
         <figure className='rounded-[20px] p-3 w-min border-primary border-1 flex justify-center animate-bounce'>
            <MessageSquare size={49} />
         </figure>
