@@ -14,7 +14,7 @@ function Sidebar() {
   }, [getUsers])
 
   return (
-    <section className={`sidebar-section bg-base-100 flex flex-col justify-start item-start h-full overflow-scroll pr-3 pl-3 md:flex-2 lg:flex-1 flex-1  ${selectedUser !== null ? 'hidden md:flex' : ''}`}>
+    <section className={`sidebar-section bg-base-100 flex flex-col justify-start item-start h-full overflow-y-scroll pr-3 pl-3 md:flex-2 lg:flex-1 flex-1  ${selectedUser !== null ? 'hidden md:flex' : ''}`}>
       <figure className='flex justify-start items-center'>
         <Users2 />
         <p>Contacts</p>
