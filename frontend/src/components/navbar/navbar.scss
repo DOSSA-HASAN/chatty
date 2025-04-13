@@ -2,6 +2,7 @@
 @import "../../utilities.scss";
 
 .navbar {
+    z-index: 99999;
     @include flex-between;
     padding: 10px;
     background-color: var(--bg-dark-purple);

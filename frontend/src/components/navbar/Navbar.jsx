@@ -8,6 +8,7 @@ const Navbar = () => {
 
   const { authUser, logout } = useAuthStore()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  console.log(authUser)
 
   return (
     <>
@@ -17,15 +18,21 @@ const Navbar = () => {
           <p>Chatty</p>
         </figure>
         <main className="account-options">
-          <Link className="setting">
-            <Settings className="icon" />
-            <p>Settings</p>
-          </Link>
-          <Link className={authUser != null ? "profile" : "hide"}>
-            <User className="icon" />
-            <p>Profile</p>
-          </Link>
-          <div onClick={logout} className={authUser ? "logout" : "hide"}>
+          <div className={authUser !== null ? "setting" : "hidden"} >
+            <Link to={'/settings'} className={authUser !== null ? "setting" : "hidden"} >
+              <Settings className="icon" />
+              <p>Settings</p>
+            </Link>
+
+          </div>
+
+          <div className={authUser !== null ? "profile" : "hidden"}>
+            <Link to={'/profile'} >
+              <User className="icon" />
+              <p>Profile</p>
+            </Link>
+          </div>
+          <div onClick={logout} className={authUser ? "logout" : "hidden"}>
             <LogOut className="icon" />
             <p>Logout</p>
           </div>
@@ -49,11 +56,11 @@ const Navbar = () => {
             <Settings className="icon" />
             <p>Settings</p>
           </Link>
-          <Link className={authUser != null ? "profile" : "hide"}>
+          <Link to={'/profile'} className={authUser === null ? "hidden" : "profile"}>
             <User className="icon" />
             <p>Profile</p>
           </Link>
-          <div onClick={logout} className={authUser ? "logout" : "hide"}>
+          <div onClick={logout} className={authUser === null ? "hidden" : "logout"}>
             <LogOut className="icon" />
             <p>Logout</p>
           </div>
