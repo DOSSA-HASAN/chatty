@@ -1,11 +1,13 @@
+import mongoose from "mongoose"
 import cloudinary from "../lib/cloudinary.js"
 import Message from "../models/message.model.js"
 import { User } from "../models/user.model.js"
+import { getRecieverSocketId, io } from "../lib/socket.js"
 
 export const getUsersForSidebar = async (req, res) => {
     try {
         const loggedInUserId = req.user._id
-        const filteredUsers = await User.find({ id: { $ne: loggedInUserId } }).select("-password")
+        const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password")
 
         res.status(200).json(filteredUsers)
     } catch (error) {
@@ -17,8 +19,13 @@ export const getUsersForSidebar = async (req, res) => {
 
 export const getMessages = async (req, res) => {
     try {
-        const { id: userToChatId } = req.params
+        let userToChatId = req.params.id
         const senderId = req.user._id
+
+        if (mongoose.isObjectIdOrHexString(userToChatId)) {
+            userToChatId = mongoose.Types.ObjectId.createFromHexString(userToChatId)
+        }
+
 
         const messages = await Message.find({
             $or: [
@@ -29,8 +36,8 @@ export const getMessages = async (req, res) => {
 
         return res.status(200).json(messages)
     } catch (error) {
-        console.log(`An error occured in getting messages: ${error.stack}`);
-        return res.statuc(500).json({ message: "could not fetch chat" })
+        console.log(`An error occured in getting messages: ${error.message}`);
+        return res.status(500).json({ message: "could not fetch chat" })
     }
 }
 
@@ -58,7 +65,10 @@ export const sendMessage = async (req, res) => {
 
         await newMessage.save();
 
-        // todo: add real time functionality with socket.io
+        const recieverSocketId = getRecieverSocketId(recieverId)
+        if (recieverSocketId) {
+            io.to(recieverSocketId).emit("newMessage", newMessage)
+        }
 
         return res.status(201).json(newMessage)
 
