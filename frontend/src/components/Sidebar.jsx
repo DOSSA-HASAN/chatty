@@ -6,8 +6,8 @@ import SidebarSkeleton from './skeleton/SidebarSkeleton'
 
 function Sidebar() {
 
-  const { messages, users, selectedUser, isUsersLoading, isMessagesLoading, getUsers, getMessages, setSelectedUser } = useChatStore();
-  const { authUser } = useAuthStore()
+  const { users, selectedUser, getUsers, setSelectedUser } = useChatStore();
+  const { authUser, onlineUsers } = useAuthStore()
 
   useEffect(() => {
     getUsers(authUser._id);
@@ -27,7 +27,7 @@ function Sidebar() {
               <img className=" mr-10 rounded-full bg-base-300 w-15 h-15 border-2" src={user.profilePic || "/no-avatar.png"} alt="" />
               <span>
                 <p>{user?.fullName || user.username}</p>
-                <p className='text-green-400'>Online</p>
+                <p className={onlineUsers.includes(user._id) ? 'text-green-400' : 'text-red-400'}>{onlineUsers.includes(user._id) ? "Online" : "Offline"}</p>
               </span>
             </div>
           ))
