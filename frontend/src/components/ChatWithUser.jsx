@@ -8,12 +8,23 @@ import SendMessage from './SendMessage';
 
 function ChatWithUser() {
 
-    const { selectedUser, setSelectedUser, isMessagesLoading, messages, getMessages, sendMessage } = useChatStore();
+    const { selectedUser, setSelectedUser, isMessagesLoading, messages, getMessages, subscribeToMessages, unsubscribeFromMessages } = useChatStore();
     const { onlineUsers, authUser } = useAuthStore();
+
+    const MessageEndRef = useRef()
+
+    useEffect(() => {
+        if (MessageEndRef.current && messages) {
+            MessageEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [messages])
 
     useEffect(() => {
         getMessages(selectedUser?._id)
-    }, [selectedUser])
+        subscribeToMessages(selectedUser?._id)
+
+        return () => unsubscribeFromMessages()
+    }, [selectedUser, getMessages])
 
     return (
         <section className='chat-with-user-section w-full p-10 flex flex-col justify-between items-center h-full border-2 border-base-200'>
@@ -23,7 +34,7 @@ function ChatWithUser() {
                     <img src={selectedUser?.profilePic || '/no-avatar.png'} alt="" className='rounded-full mr-3 h-full border-2' />
                     <figcaption className='flex flex-col justify-center items-start'>
                         <p>{selectedUser?.username || selectedUser?.fullName}</p>
-                        <p className='text-green-400'>Online</p>
+                        <p className={onlineUsers.includes(selectedUser._id) ? 'text-green-400' : 'text-red-400'}>{onlineUsers.includes(selectedUser._id) ? "Online" : "Offline"}</p>
                     </figcaption>
                 </figure>
                 <div onClick={() => setSelectedUser(null)} className='hover:cursor-pointer hover:text-red-400'>
@@ -40,10 +51,11 @@ function ChatWithUser() {
                                     <div key={mssg._id} className={`w-full items-start flex ${selectedUser?._id !== mssg.senderId ? 'justify-start flex-row-reverse' : 'justify-start'}`}>
                                         <img src={selectedUser?._id !== mssg.senderId ? selectedUser?.profilePic || "/no-avatar.png" : authUser?.profilePic || "/no-avatar.png"} className='mr-2 ml-2 w-10 h-10 rounded-full border-2' alt="" />
                                         <div className="flex flex-col items-end">
-                                            {mssg.image && <img src={mssg.image} alt="" className='w-[150px] h-[150px]'/> }
+                                            {mssg.image && <img src={mssg.image} alt="" className='w-[150px] h-[150px]' />}
                                             {mssg.text && <p className={`rounded-md p-3 ${mssg.recieverId !== selectedUser._id ? 'bg-secondary text-secondary-content' : 'bg-primary text-primary-content'}`}>{mssg.text}</p>}
                                             <p className={`font-bold text-[11px] ${selectedUser._id !== mssg.senderId ? 'text-primary' : 'text-secondary'}`}>{mssg.createdAt.split("T")[0]}</p>
                                         </div>
+                                        <div ref={MessageEndRef}></div>
                                     </div>
                                 ))
                             }
