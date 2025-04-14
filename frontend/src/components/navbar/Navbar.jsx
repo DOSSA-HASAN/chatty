@@ -8,7 +8,6 @@ const Navbar = () => {
 
   const { authUser, logout } = useAuthStore()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  console.log(authUser)
 
   return (
     <>
@@ -52,11 +51,11 @@ const Navbar = () => {
           }
         </figure>
         <main className={isMenuOpen ? "account-options showMobileOptions" : "account-options"}>
-          <Link className="setting">
+          <Link to={'/settings'} onClick={() => setIsMenuOpen(!isMenuOpen)} className="setting">
             <Settings className="icon" />
             <p>Settings</p>
           </Link>
-          <Link to={'/profile'} className={authUser === null ? "hidden" : "profile"}>
+          <Link to={'/profile'} onClick={() => setIsMenuOpen(!isMenuOpen)}  className={authUser === null ? "hidden" : "profile"}>
             <User className="icon" />
             <p>Profile</p>
           </Link>
