@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: cupcake, dracula, light, dark, bumblebee, emerald, corporate, synthwave, retro, cyberpunk, valentine, halloween, garden, forest, aqua, lofi, pastel, fantasy, wireframe, black, luxury, cmyk, autumn, business, acid, lemonade, night, coffee, winter, dim, sunset;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+section{
+  z-index: 1;
+}
+
+.nav, .navbar-mobile{
+  z-index: 2;
+}
+

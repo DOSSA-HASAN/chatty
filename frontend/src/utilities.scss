@@ -22,6 +22,32 @@
     align-items: start;
 }
 
+@mixin flex-start{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+@mixin flex-start-col{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+}
+
+@mixin flex-end{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+@mixin flex-end-col{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    flex-direction: column;
+}
+
 @mixin flex-between-col{
     display: flex;
     justify-content: space-between;
