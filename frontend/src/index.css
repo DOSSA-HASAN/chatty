@@ -9,7 +9,7 @@ body {
 }
 
 section{
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .nav, .navbar-mobile{
